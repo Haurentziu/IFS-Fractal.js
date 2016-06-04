@@ -1,0 +1,16 @@
+body{
+	background-color: #003153;
+}
+
+.ruleForm{
+	position: relative;
+	color: #fff;
+	left: 920px;
+	top: -770px;
+	width: 250px;
+	padding-left: 20px;
+	margin-top: 10px;
+	border: 1px solid #fff;
+	border-radius: 3px;
+}
+
