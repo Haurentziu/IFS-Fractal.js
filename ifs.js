@@ -16,7 +16,7 @@ var mouseLoc = {
 	y: 0,
 }
 
-var rules = presets[1];
+var rules = presets[8];
 
 var isDragged = false;
 

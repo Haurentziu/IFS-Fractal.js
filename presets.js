@@ -6,6 +6,7 @@ function deg2rad(angle){
   return angle * Math.PI / 180;
 }
 
+var alpha = deg2rad(45);
 
 var rot= [
   [deg2rad(0), deg2rad(0), deg2rad(0), deg2rad(180), deg2rad(180)],
@@ -140,7 +141,7 @@ var presets = [
       b: -0.28,
       c: 0.28,
       d: 0.165,
-      tx: 0.33,
+      tx: 0.34,
       ty: 0,
       weight: 0.2,
     },
@@ -151,7 +152,7 @@ var presets = [
       c: -0.28,
       d: 0.165,
       tx: 0.5,
-      ty: 0.288,
+      ty: 0.289,
       weight: 0.2,
     },
 
@@ -160,7 +161,7 @@ var presets = [
       b: 0,
       c: 0,
       d: 0.33,
-      tx: 0.66,
+      tx: 0.67,
       ty: 0,
       weight: 0.2,
     },
@@ -170,7 +171,7 @@ var presets = [
       b: 0,
       c: 0,
       d: 0.33,
-      tx: 0.66,
+      tx: 0.67,
       ty: 0,
       weight: 0.2,
     }
@@ -278,6 +279,218 @@ var presets = [
       d: 0,
       tx: 0.5,
       ty: 0,
+      weight: 0,
+    }
+  ],
+
+  //Sierpinski Pentagon
+  [
+    {
+      a: 0.382,
+      b: 0,
+      c: 0,
+      d: 0.382,
+      tx: 0,
+      ty: 0,
+      weight: 0.2,
+    },
+
+    {
+      a: 0.382,
+      b: 0,
+      c: 0,
+      d: 0.382,
+      tx: 0.618,
+      ty: 0,
+      weight: 0.2,
+    },
+
+    {
+      a: 0.382,
+      b: 0,
+      c: 0,
+      d: 0.382,
+      tx: 0.809,
+      ty: 0.588,
+      weight: 0.2,
+    },
+
+    {
+      a: 0.382,
+      b: 0,
+      c: 0,
+      d: 0.382,
+      tx: 0.309,
+      ty: 0.951,
+      weight: 0.2,
+    },
+
+    {
+      a: 0.382,
+      b: 0,
+      c: 0,
+      d: 0.382,
+      tx: -0.191,
+      ty: 0.588,
+      weight: 0.2,
+    }
+  ],
+
+  //Heighway Dragon
+  [
+    {
+      a: 0.5,
+      b: -0.5,
+      c: 0.5,
+      d: 0.5,
+      tx: 0,
+      ty: 0,
+      weight: 0.5,
+    },
+
+    {
+      a: -0.5,
+      b: -0.5,
+      c: 0.5,
+      d: -0.5,
+      tx: 1,
+      ty: 0,
+      weight: 0.5,
+    },
+
+    {
+      a: 0.382,
+      b: 0,
+      c: 0,
+      d: 0.382,
+      tx: 0.809,
+      ty: 0.588,
+      weight: 0,
+    },
+
+    {
+      a: 0.382,
+      b: 0,
+      c: 0,
+      d: 0.382,
+      tx: 0.309,
+      ty: 0.951,
+      weight: 0,
+    },
+
+    {
+      a: 0.382,
+      b: 0,
+      c: 0,
+      d: 0.382,
+      tx: -0.191,
+      ty: 0.588,
+      weight: 0,
+    }
+  ],
+
+  //Levy Dragon
+  [
+    {
+      a: 0.5,
+      b: -0.5,
+      c: 0.5,
+      d: 0.5,
+      tx: 0,
+      ty: 0,
+      weight: 0.5,
+    },
+
+    {
+      a: 0.5,
+      b: 0.5,
+      c: -0.5,
+      d: 0.5,
+      tx: 0.5,
+      ty: 0.5,
+      weight: 0.5,
+    },
+
+    {
+      a: 0.382,
+      b: 0,
+      c: 0,
+      d: 0.382,
+      tx: 0.809,
+      ty: 0.588,
+      weight: 0,
+    },
+
+    {
+      a: 0.382,
+      b: 0,
+      c: 0,
+      d: 0.382,
+      tx: 0.309,
+      ty: 0.951,
+      weight: 0,
+    },
+
+    {
+      a: 0.382,
+      b: 0,
+      c: 0,
+      d: 0.382,
+      tx: -0.191,
+      ty: 0.588,
+      weight: 0,
+    }
+  ],
+
+  //Pythagorean Tree
+  [
+    {
+      a: Math.cos(alpha) * Math.cos(alpha),
+      b: -Math.cos(alpha) * Math.sin(alpha),
+      c: Math.cos(alpha) * Math.sin(alpha),
+      d: Math.cos(alpha) * Math.cos(alpha),
+      tx: 0,
+      ty: 1,
+      weight: 0.34,
+    },
+
+    {
+      a: Math.sin(alpha) * Math.sin(alpha),
+      b: Math.cos(alpha) * Math.sin(alpha),
+      c: -Math.cos(alpha) * Math.sin(alpha),
+      d: Math.sin(alpha) * Math.sin(alpha),
+      tx: Math.cos(alpha) * Math.cos(alpha),
+      ty: 1 + Math.cos(alpha) * Math.sin(alpha),
+      weight: 0.33,
+    },
+
+    {
+      a: 1,
+      b: 0,
+      c: 0,
+      d: 1,
+      tx: 0,
+      ty: 0,
+      weight: 0.33,
+    },
+
+    {
+      a: 0.382,
+      b: 0,
+      c: 0,
+      d: 0.382,
+      tx: 0.309,
+      ty: 0.951,
+      weight: 0,
+    },
+
+    {
+      a: 0.382,
+      b: 0,
+      c: 0,
+      d: 0.382,
+      tx: -0.191,
+      ty: 0.588,
       weight: 0,
     }
   ],
