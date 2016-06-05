@@ -4,64 +4,21 @@ var ctx;
 var width;
 var height;
 
-var rot= [deg2rad(0), -deg2rad(60), deg2rad(60), deg2rad(0)];
-
-function rad2deg(angle){
-	return angle * 180 / 3.1415;
+var offset = {
+	x: 0,
+	y: 0,
 }
 
-function deg2rad(angle){
-	return angle * 3.1415 / 180;
+var zoom = 300;
+
+var mouseLoc = {
+	x: 0,
+	y: 0,
 }
 
+var rules = presets[1];
 
-var rules = [{
-               a: Math.cos(rot[0]),
-               b: Math.sin(rot[0]),
-               c: -Math.sin(rot[0]),
-               d: Math.cos(rot[0]),
-               tx: 0,
-               ty: 0,
-               scaleX: 0.33,
-               scaleY: 0.33,
-               weight: 0.25,
-             },
-
-             {
-               a: Math.cos(rot[1]),
-               b: Math.sin(rot[1]),
-               c: -Math.sin(rot[1]),
-               d: Math.cos(rot[1]),
-               tx: 0.33,
-               ty: 0,
-               scaleX: 0.33,
-               scaleY: 0.33,
-               weight: 0.25,
-             },
-
-             {
-              a: Math.cos(rot[2]),
-               b: Math.sin(rot[2]),
-               c: -Math.sin(rot[2]),
-               d: Math.cos(rot[2]),
-               tx: 0.5,
-               ty: 0.288,
-               scaleX: 0.33,
-               scaleY: 0.33,
-               weight: 0.25,
-             },
-
-             {
-              a: Math.cos(rot[3]),
-               b: Math.sin(rot[3]),
-               c: -Math.sin(rot[3]),
-               d: Math.cos(rot[3]),
-               tx: 0.66,
-               ty: 0,
-               scaleX: 0.33,
-               scaleY: 0.33,
-               weight: 0.25,
-             }];
+var isDragged = false;
 
 
 var x = Math.random();
@@ -70,11 +27,21 @@ var	y = Math.random();
 
 window.onload = function(){
 	c = document.getElementById("canvas");
+	c.addEventListener("mousedown", mouseDownListener, false);
+	c.addEventListener("mousemove", mouseMoveListener, false);
+	c.addEventListener("mouseup", mouseUpListener, false);
+	c.addEventListener("wheel", scrollListener, false);
+	c.addEventListener("mouseenter", mouseEnterListener, false);
+	c.addEventListener("mouseleave", mouseLeaveListener, false);
+	ctx = c.getContext("2d");
 	width = c.width;
 	height = c.height;
-	setRules();
-	ctx = c.getContext("2d");
-	ctx.translate(width / 2, height);
+	offset.x = width /2;
+	offset.y = height;
+
+	writeSlidersRules();
+
+
 	draw();
 }
 
@@ -84,10 +51,10 @@ function draw(){
 }
 
 function iterate(){
-	for(var  i = 0; i < 50000; i++){
+	for(var  i = 0; i < 5000; i++){
 		rule = getRule();
-		x1 = rule.scaleX * (x * rule.a + y * rule.b) + rule.tx;
-		y1 = rule.scaleY * (x * rule.c + y * rule.d) + rule.ty;
+		x1 = x * rule.a + y * rule.b + rule.tx;
+		y1 = x * rule.c + y * rule.d + rule.ty;
 
 		x = x1;
 		y = y1;
@@ -98,7 +65,7 @@ function iterate(){
 }
 
 function plot(x, y){
-	ctx.fillRect(-200 + x * 600, -300 -y * 600, 0.5, 0.5);
+	ctx.fillRect(offset.x + x * zoom, offset.y -y * zoom, 0.5, 0.5);
 }
 
 
@@ -114,38 +81,104 @@ function getRule(){
 	}
 }
 
-function setRules(){
-	elements = document.getElementsByClassName("ruleForm");
-	for(var i = 0; i < rules.length; i++){
-		sliders = elements[i].getElementsByClassName("slider");
-		sliders[0].value = rad2deg(rot[i]);
-		sliders[1].value = rules[i].tx;
-		sliders[2].value = rules[i].ty;
-		sliders[3].value = rules[i].scaleX;
-		sliders[4].value = rules[i].scaleY;
-	}
-}
-
-function update(){
+function writeSlidersRules(){
 	elements = document.getElementsByClassName("ruleForm");
 	for(var i = 0; i < elements.length; i++){
 		sliders = elements[i].getElementsByClassName("slider");
-		angle = parseFloat(sliders[0].value) * 3.1415 / 180;
-		console.log(sliders.length);
-		rules[i].a = Math.cos(angle);
-		rules[i].b = Math.sin(angle);
-		rules[i].c = - Math.sin(angle);
-		rules[i].d = Math.cos(angle);
-		rules[i].ty = parseFloat(sliders[1].value);
-		rules[i].tx = parseFloat(sliders[2].value);
-		rules[i].scaleX = parseFloat(sliders[3].value);
-		rules[i].scaleY = parseFloat(sliders[4].value);
-
+		sliders[0].value = rules[i].a;
+		sliders[1].value = rules[i].b;
+		sliders[2].value = rules[i].c;
+		sliders[3].value = rules[i].d;
+		sliders[4].value = rules[i].tx;
+		sliders[5].value = rules[i].ty;
 	}
+}
+
+function mouseMoveListener(event){
+	if(isDragged){
+		rect = canvas.getBoundingClientRect();
+		x = event.clientX - rect.left;
+		y = event.clientY - rect.top;
+		offset.x += x - mouseLoc.x;
+		offset.y += y - mouseLoc.y;
+		mouseLoc.x = x;
+		mouseLoc.y = y;
+		clearScreen();
+	}
+}
+
+function mouseDownListener(event){
+	isDragged = true;
+	rect = canvas.getBoundingClientRect();
+	mouseLoc.x = event.clientX - rect.left;
+	mouseLoc.y = event.clientY - rect.top;
+}
+
+function mouseUpListener(event){
+	isDragged = false;
+}
+
+function scrollListener(event){
+	if(event.wheelDelta > 0){
+		zoom *= 1.1;
+	}
+	else zoom /= 1.1;
+	clearScreen();
+}
+
+function mouseEnterListener(){
+	document.body.classList.add("noScroll");
+}
+
+function mouseLeaveListener(){
+	document.body.classList.remove("noScroll");
+}
+
+
+function setRule(select){
+	rules = presets[parseInt(select.value)];
+	ctx.clearRect(0, 0, c.width, c.height);
+	writeSlidersRules();
+}
+
+function getRandomRules(){
+	for(var  i = 0; i < rules.length; i++){
+		rules[i].a = Math.random();
+		rules[i].b = Math.random();
+		rules[i].c = Math.random();
+		rules[i].d = Math.random();
+
+		rules[i].tx = Math.random();
+		rules[i].ty = Math.random();
+	}
+	writeSlidersRules();
+
+	clearScreen();
+
+}
+
+function clearScreen(){
 	ctx.save();
 	ctx.setTransform(1, 0, 0, 1, 0, 0);
 	ctx.clearRect(0, 0, c.width, c.height);
 	ctx.restore();
+}
+
+function update(){
+	elements = document.getElementsByClassName("ruleForm");
+	console.log(elements.length)
+	for(var i = 0; i < elements.length; i++){
+		sliders = elements[i].getElementsByClassName("slider");
+		rules[i].a = parseFloat(sliders[0].value);
+		rules[i].b = parseFloat(sliders[1].value);
+		rules[i].c = parseFloat(sliders[2].value);
+		rules[i].d = parseFloat(sliders[3].value);
+
+		rules[i].tx = parseFloat(sliders[4].value);
+		rules[i].ty = parseFloat(sliders[5].value);
+		console.log(rules[i]);
+	}
+	clearScreen();
 }
 
 

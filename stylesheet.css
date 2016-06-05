@@ -1,16 +1,30 @@
 body{
 	background-color: #003153;
+	color: #fff;
 }
 
 .ruleForm{
 	position: relative;
-	color: #fff;
 	left: 920px;
-	top: -770px;
-	width: 250px;
+	top: -820px;
+	width: 280px;
 	padding-left: 20px;
 	margin-top: 10px;
 	border: 1px solid #fff;
 	border-radius: 3px;
 }
 
+.slider{
+	width: 180px;
+}
+
+#presets{
+	position: relative;
+	top : -990px;
+	left: 0px;
+}
+
+.noScroll{
+	position: fixed;
+	overflow-y:scroll;
+}

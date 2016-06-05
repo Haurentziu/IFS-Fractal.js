@@ -1,87 +1,142 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>The Chaos Game</title>
+		<title>IFS Fractals</title>
 		<link rel = "stylesheet" type = "text/css" href = "stylesheet.css">
 	</head>
 
 	<body>
+		<script src = "presets.js"></script>
 		<script src = "ifs.js"></script>
 		<canvas id = "canvas" width = "900" height = "800" style = "border:1px solid #000000;"></canvas>
 
 		<form class = "ruleForm">
-			Rotation:
-			<input class = "slider" type = "range" onchange="update();" max = "180" min = "-180" step = "1"><br>
+			a:
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
 
-			TranlateX: 
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.0001"><br>
-			TranlateY: 
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.0001"><br>
+			b: 
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
 
-			ScaleX:
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.0001"><br>
-			ScaleY: 
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.0001"><br>
+			c:
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
+
+			d:
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
+			
+			tx: 
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
+
+			ty:
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
 
 			Weight: 
-			<input class = "slider" type = "range" onchange="update();" max = "180" min = "-180" step = "0.01"><br>
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.001"><br>
 		</form>
 
 		<form class = "ruleForm">
-			Rotation:
-			<input class = "slider" type = "range" onchange="update();" max = "180" min = "-180" step = "0.01"><br>
+			a:
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
 
-			TranlateX: 
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.01"><br>
-			TranlateY: 
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.01"><br>
+			b: 
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
 
-			ScaleX:
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.0001"><br>
-			ScaleY: 
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.0001"><br>
+			c:
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
+
+			d:
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
+			
+			tx: 
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
+
+			ty:
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
 
 			Weight: 
-			<input class = "slider" type = "range" onchange="update();" max = "180" min = "-180" step = "0.01"><br>
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.001"><br>
 		</form>
 
 		<form class = "ruleForm">
-			Rotation:
-			<input class = "slider" type = "range" onchange="update();" max = "180" min = "-180" step = "0.01"><br>
+			a:
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
 
-			TranlateX: 
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.01"><br>
-			TranlateY: 
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.01"><br>
+			b: 
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
 
-			ScaleX:
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.0001"><br>
-			ScaleY: 
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.0001"><br>
+			c:
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
+
+			d:
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
+			
+			tx: 
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
+
+			ty:
+			<input class = "slider" type = "range" onchange="update();" max = "2" min = "-2" step = "0.0002"><br>
 
 			Weight: 
-			<input class = "slider" type = "range" onchange="update();" max = "180" min = "-180" step = "0.01"><br>
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.001"><br>
 		</form>
 
 		<form class = "ruleForm">
-			Rotation:
-			<input class = "slider" type = "range" onchange="update();" max = "180" min = "-180" step = "0.01"><br>
+			a:
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "-1" step = "0.0001"><br>
 
-			TranlateX: 
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.01"><br>
-			TranlateY: 
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.01"><br>
+			b: 
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "-1" step = "0.0001"><br>
 
-			ScaleX:
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.0001"><br>
-			ScaleY: 
-			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.0001"><br>
+			c:
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "-1" step = "0.0001"><br>
+
+			d:
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "-1" step = "0.0001"><br>
+			
+			tx: 
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "-1" step = "0.0001"><br>
+
+			ty:
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "-1" step = "0.0001"><br>
 
 			Weight: 
-			<input class = "slider" type = "range" onchange="update();" max = "180" min = "-180" step = "0.01"><br>
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.01"><br>
+		</form>
+
+		<form class = "ruleForm">
+			a:
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "-1" step = "0.0001"><br>
+
+			b: 
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "-1" step = "0.0001"><br>
+
+			c:
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "-1" step = "0.0001"><br>
+
+			d:
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "-1" step = "0.0001"><br>
+			
+			tx: 
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "-1" step = "0.0001"><br>
+
+			ty:
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "-1" step = "0.0001"><br>
+
+			Weight: 
+			<input class = "slider" type = "range" onchange="update();" max = "1" min = "0" step = "0.01"><br>
 		</form>
 
 
+		<div id = "presets">
+			Presets
+			<select onchange="setRule(this);">
+				<option value = "1">Sierpinski Triangle</option>
+				<option value = "3">Tree</option>
+				<option value = "4">Barnsley fern</option> 
+				<option value = "2">Koch Curve</option>
+				<option value = "0">Some Triangle</option> 
+			</select>
+			<input type = "button" onclick = "getRandomRules();" value = "Generate Random Rules">
+		</div>
 
 
 	</body>
